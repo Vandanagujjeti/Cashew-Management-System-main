@@ -34,15 +34,20 @@ function showOrderPlacementForm() {
     showSection('order_placement');
 }
 
-// Function to validate the order placement form
 function validateOrderPlacementForm(event) {
-    event.preventDefault();
+    const namePattern = /^[a-zA-Z\s]+$/;
+    const customerName = document.getElementById('cust_name').value;
 
-    // Add your validation logic here
-
-    alert('Order placed successfully!');
+    if (!namePattern.test(customerName)) {
+        alert('Customer Name should only contain letters and spaces.');
+        event.preventDefault();
+        return false;
+    }
     return true;
 }
+
+document.getElementById('OrderplacementForm').addEventListener('submit', validateOrderPlacementForm);
+
 
 // Example chart for Sales Trends
 var ctx = document.getElementById('salesChart').getContext('2d');
@@ -351,6 +356,36 @@ function initializeOrderplacementForm() {
         });
     }
 }
+
+function validateOrderPlacementForm(event) {
+    const namePattern = /^[a-zA-Z\s]+$/;
+
+    const customerName = document.getElementById('cust_name').value;
+    const customerID = document.getElementById('cust_id').value;
+    const orderID = document.getElementById('order_id').value;
+    const dateOfOrder = document.getElementById('date_of_order').value;
+    const dateOfDispatch = document.getElementById('date_of_dispatch').value;
+    const totalTaxValue = document.getElementById('total_tax_value').value;
+    const totalTaxes = document.getElementById('total_taxes').value;
+    const totalAmount = document.getElementById('total_amount').value;
+
+    // Validate Customer Name
+    if (!namePattern.test(customerName)) {
+        alert('Customer Name should only contain letters and spaces.');
+        return false;
+    }
+
+    // Add other validation logic if needed
+
+    alert('Order placed successfully!');
+    return true;
+}
+
+// Ensure the event listener is attached
+document.getElementById('orderPlacementForm').addEventListener('submit', validateOrderPlacementForm);
+
+
+
 // Add these new functions to script.js
 function showEmployeeForm() {
     const form = document.getElementById('employeeFormContainer');
